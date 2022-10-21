@@ -17,7 +17,8 @@
 				search: '',
                 form_errors: {},
                 debounce: null,
-                loading: false
+                loading: false,
+                form_loading: false
             },
             mounted() {
                 this.getBodyLocations();
@@ -70,9 +71,27 @@
 				},
                 validateData: function(){
 					if(typeof(this.form_data.first_name) == 'undefined' || this.form_data.first_name == '') {
+						alert("First name is required");
 						return false;
 					}
 					if(typeof(this.form_data.last_name) == 'undefined' || this.form_data.last_name == '') {
+						alert("Last name is required");
+						return false;
+					}
+					if(typeof(this.form_data.age) == 'undefined' || this.form_data.age == '') {
+						alert("Age is required");
+						return false;
+					}
+					if(typeof(this.form_data.gender) == 'undefined' || this.form_data.gender == '') {
+						alert("Gender is required");
+						return false;
+					}
+					if(typeof(this.form_data.body_locations) == 'undefined' || this.form_data.body_locations.length == 0) {
+						alert("Select at least one body location");
+						return false;
+					}
+					if(typeof(this.form_data.symptoms) == 'undefined' || this.form_data.symptoms.length == 0) {
+						alert("Select at least one symptom to get initial diagnosis");
 						return false;
 					}
 					return true;
@@ -84,6 +103,7 @@
                     return text.toLowerCase().includes(this.search.toLowerCase());
                 },
                 getDiagnosis: function(){
+					if(!this.validateData()) return;
 					this.form_loading = true;
 					axios
                         .post(`${baseURL}api/diagnosis`, this.form_data)

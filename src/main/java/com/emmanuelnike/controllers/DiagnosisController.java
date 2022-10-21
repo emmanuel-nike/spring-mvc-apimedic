@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +26,10 @@ import com.emmanuelnike.utils.CustomConverter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
+@CacheConfig(cacheNames={"api-results"})
 public class DiagnosisController {
 	
+    @Cacheable
 	@RequestMapping(value = "api/body-locations", method = RequestMethod.GET)
 	public @ResponseBody List<HealthItem> bodyLocations(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		List<HealthItem> healthItems = new ArrayList<>();
@@ -41,7 +45,7 @@ public class DiagnosisController {
 		return healthItems;
 	}
 	
-	
+	@Cacheable
 	@RequestMapping(value = "api/symptoms", method = RequestMethod.GET)
 	public @ResponseBody List<HealthItem> symptoms(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		List<HealthItem> healthItems = new ArrayList<>();

@@ -50,7 +50,7 @@
 				</div>
 	   		</div>
 	   </div>
-	   <div class="row mb-2 sb-container">
+	   <div class="row mb-3 sb-container">
 	   		<span class="mb-2">Body Locations</span>
 	   		<div class="col-md-3" v-for="bl in body_locations" :key="'body'+bl.ID">
 	 			<div class="form-check">
@@ -58,8 +58,11 @@
 				  <label class="form-check-label" v-text="bl.Name"></label>
 				</div>
 	 		</div>
+	 		<div class="col-md-12" v-if="body_locations.length == 0">
+	 			<div class="text-center">Loading...</div>
+	 		</div>
 	   </div>
-	   <div class="row mb-2 sb-container">
+	   <div class="row mb-3 sb-container">
 	   		<span class="mb-2">Symptoms</span>
 	   		<div class="col-md-12 mb-3">
 	   			<input v-model="search" placeholder="Search & filter" />
@@ -70,8 +73,11 @@
 				  <label class="form-check-label" v-text="bl.Name"></label>
 				</div>
 	 		</div>
+	 		<div class="col-md-12" v-if="symptoms.length == 0">
+	 			<div class="text-center">Loading...</div>
+	 		</div>
 	   </div>
-	   <div class="row mb-2 sb-container" v-if="diagnosis.length > 0">
+	   <div class="row mb-3 sb-container" v-if="diagnosis.length > 0">
 	   		<span class="mb-2">Initial Diagnosis</span>
 	   		<div class="col-md-12 table-responsive">
 	   		<table class="table">
@@ -100,7 +106,7 @@
 	   		</div>
 	   </div>
    </form>
-   <a class="btn btn-primary" href="#" v-on:click="getDiagnosis" role="button" v-if="diagnosis.length == 0">Get Diagnosis</a>
-   <a class="btn btn-primary" href="#" v-on:click="getDiagnosis" role="button" v-else>Schedule Appointment</a>
+   <button class="btn btn-primary" v-on:click="getDiagnosis" role="button" v-if="diagnosis.length == 0" :disabled="form_loading">Get Diagnosis</button>
+   <button class="btn btn-primary" v-on:click="getDiagnosis" role="button" v-else :disabled="form_loading">Schedule Appointment</button>
    
  </div>

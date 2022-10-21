@@ -28,16 +28,6 @@ public class TestController {
 	@RequestMapping(value = "start-diagnosis", method = RequestMethod.GET)
 	public ModelAndView startDiagnosis(HttpServletRequest request, HttpServletResponse response)
 	{
-		DiagnosisClient _diagnosisClient;
-		try {
-			_diagnosisClient = new DiagnosisClient();
-			_diagnosisClient.loadBodyLocations().toString();
-			_diagnosisClient.loadSymptoms();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		System.out.println(request.getRequestURL().toString());
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("start-diagnosis");

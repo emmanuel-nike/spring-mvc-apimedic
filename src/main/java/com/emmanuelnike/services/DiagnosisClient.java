@@ -18,6 +18,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 /*import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;*/
+import org.springframework.cache.annotation.Cacheable;
 
 import com.emmanuelnike.models.AccessToken;
 import com.emmanuelnike.models.Config;
@@ -56,7 +57,7 @@ public class DiagnosisClient {
 
 	}
 	
-	//@Cacheable(cacheNames="tokens", key="#username")
+	@Cacheable(cacheNames={"tokens"}, key="#username")
 	private AccessToken LoadToken(String username, String password, String url) throws Exception {
 		System.out.println("Tokens data - " + username + ":" + password);
 		SecretKeySpec keySpec = new SecretKeySpec(password.getBytes(), "HmacMD5");

@@ -1,5 +1,8 @@
 package com.emmanuelnike.models;
 
+import lombok.Data;
+
+@Data
 public class AccessToken {
 	
 	/// <summary>
