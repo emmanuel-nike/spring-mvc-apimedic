@@ -105,8 +105,22 @@
 	   		<a href="#" class="float-end" v-on:click="resetDiagnosis">Reset Diagnosis</a>
 	   		</div>
 	   </div>
+   		<div class="row mb-2">
+	   		<div class="col-md-7">
+	   			<div class="mb-3">
+				  <label class="form-label">Doctor's Name</label>
+				  <input class="form-control" placeholder="e.g. John Doe" v-model="form_data.doctors_name">
+				</div>
+	   		</div>
+	   		<div class="col-md-5">
+	   			<div class="mb-3">
+				  <label class="form-label">Schedule Date</label>
+				  <input class="form-control" type="datetime" v-model="form_data.schedule_date">
+				</div>
+	   		</div>
+	   </div>
    </form>
    <button class="btn btn-primary" v-on:click="getDiagnosis" role="button" v-if="diagnosis.length == 0" :disabled="form_loading">Get Diagnosis</button>
-   <button class="btn btn-primary" v-on:click="getDiagnosis" role="button" v-else :disabled="form_loading">Schedule Appointment</button>
+   <button class="btn btn-primary" v-on:click="createAppointment" role="button" v-else :disabled="form_loading">Schedule Appointment</button>
    
  </div>

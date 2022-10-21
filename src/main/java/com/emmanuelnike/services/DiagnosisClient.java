@@ -16,10 +16,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-/*import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;*/
+
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.emmanuelnike.models.AccessToken;
 import com.emmanuelnike.models.Config;
@@ -33,7 +33,7 @@ import com.emmanuelnike.models.SelectorStatus;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Component
+@Service
 public class DiagnosisClient {
 	
 	private AccessToken token;

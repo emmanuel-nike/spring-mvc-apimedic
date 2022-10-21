@@ -63,6 +63,30 @@
                             this.loading = false;
                        });
                 },
+                createAppointment: function(){
+                    if(!this.validateData()) return;
+					this.form_loading = true;
+					axios
+                        .post(`${baseURL}api/create-appointment`, this.form_data)
+                        .then(({data}) => {
+                            alert("Appointment has been created successfully");
+                            this.form_data = {
+								gender: "0",
+								age: "25",
+								body_locations: [],
+								symptoms: [],
+								diagnosis: []
+							};
+                        })
+                        .catch(({
+                            response: error
+                        }) => {
+                            this.handleErrors(error);
+                        })
+                        .then(() => {
+                            this.form_loading = false;
+                       });
+                },
                 specializationReduce: function(specializations){
 					return specializations.reduce(function(accl, curVal) {
 						if(accl == '') return curVal.Name; 

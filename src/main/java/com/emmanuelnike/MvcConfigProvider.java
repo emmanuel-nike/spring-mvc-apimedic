@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 @EnableWebMvc
 @EnableCaching
-@ComponentScan("com.emmanuelnike.controllers")
+@ComponentScan({"com.emmanuelnike.controllers", "com.emmanuelnike.services"})
 public class MvcConfigProvider extends WebMvcConfigurerAdapter {
     @Bean(name = "springCM")
     public CacheManager cacheManager() {

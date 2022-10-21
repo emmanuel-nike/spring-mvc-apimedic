@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.emmanuelnike.models.Gender;
@@ -25,14 +26,12 @@ import com.emmanuelnike.services.DiagnosisClient;
 import com.emmanuelnike.utils.CustomConverter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
+@RestController
 public class DiagnosisController {
-    
-    DiagnosisClient _diagnosisClient;
 	
     //@Cacheable(value="api-results", key="body-locations")
 	@RequestMapping(value = "api/body-locations", method = RequestMethod.GET)
-	public @ResponseBody List<HealthItem> bodyLocations(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public List<HealthItem> bodyLocations(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		List<HealthItem> healthItems = new ArrayList<>();
 		try {
 			DiagnosisClient _diagnosisClient = new DiagnosisClient();
@@ -48,7 +47,7 @@ public class DiagnosisController {
 	
 	//@Cacheable(value="api-results", key="symptoms")
 	@RequestMapping(value = "api/symptoms", method = RequestMethod.GET)
-	public @ResponseBody List<HealthItem> symptoms(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public List<HealthItem> symptoms(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		List<HealthItem> healthItems = new ArrayList<>();
 		try {
 			DiagnosisClient _diagnosisClient = new DiagnosisClient();
@@ -78,7 +77,7 @@ public class DiagnosisController {
 		
 		try {
 			System.out.println(data);
-			_diagnosisClient = new DiagnosisClient();
+			DiagnosisClient _diagnosisClient = new DiagnosisClient();
 			healthDiagnosis = _diagnosisClient.loadDiagnosis(symptoms, gender, Year.now().getValue() - Integer.valueOf(age));
 			
 		} catch (Exception e) {
