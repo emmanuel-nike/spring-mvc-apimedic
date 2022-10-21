@@ -26,10 +26,11 @@ import com.emmanuelnike.utils.CustomConverter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
-@CacheConfig(cacheNames={"api-results"})
 public class DiagnosisController {
+    
+    DiagnosisClient _diagnosisClient;
 	
-    @Cacheable
+    //@Cacheable(value="api-results", key="body-locations")
 	@RequestMapping(value = "api/body-locations", method = RequestMethod.GET)
 	public @ResponseBody List<HealthItem> bodyLocations(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		List<HealthItem> healthItems = new ArrayList<>();
@@ -45,7 +46,7 @@ public class DiagnosisController {
 		return healthItems;
 	}
 	
-	@Cacheable
+	//@Cacheable(value="api-results", key="symptoms")
 	@RequestMapping(value = "api/symptoms", method = RequestMethod.GET)
 	public @ResponseBody List<HealthItem> symptoms(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		List<HealthItem> healthItems = new ArrayList<>();
@@ -61,6 +62,7 @@ public class DiagnosisController {
 		return healthItems;
 	}
 	
+	//@Cacheable(value="api-results", key="diagnosis")
 	@RequestMapping(value = "api/diagnosis", method = RequestMethod.POST)
 	public @ResponseBody List<HealthDiagnosis> diagnosis(@RequestBody String data) throws Exception{
 		JSONObject obj = new JSONObject(data);
@@ -76,7 +78,7 @@ public class DiagnosisController {
 		
 		try {
 			System.out.println(data);
-			DiagnosisClient _diagnosisClient = new DiagnosisClient();
+			_diagnosisClient = new DiagnosisClient();
 			healthDiagnosis = _diagnosisClient.loadDiagnosis(symptoms, gender, Year.now().getValue() - Integer.valueOf(age));
 			
 		} catch (Exception e) {

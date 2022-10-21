@@ -19,6 +19,7 @@ import org.apache.http.impl.client.HttpClients;
 /*import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;*/
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Component;
 
 import com.emmanuelnike.models.AccessToken;
 import com.emmanuelnike.models.Config;
@@ -32,7 +33,7 @@ import com.emmanuelnike.models.SelectorStatus;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@EnableCaching
+@Component
 public class DiagnosisClient {
 	
 	private AccessToken token;
@@ -57,7 +58,7 @@ public class DiagnosisClient {
 
 	}
 	
-	@Cacheable(cacheNames={"tokens"}, key="#username")
+	@Cacheable(value="tokens", key="#username")
 	private AccessToken LoadToken(String username, String password, String url) throws Exception {
 		System.out.println("Tokens data - " + username + ":" + password);
 		SecretKeySpec keySpec = new SecretKeySpec(password.getBytes(), "HmacMD5");
@@ -161,6 +162,7 @@ public class DiagnosisClient {
     /// Load all symptoms
     /// </summary>
     /// <returns>Returns list of all symptoms</returns>
+	@Cacheable(value="api-results")
 	public List<HealthItem> loadSymptoms() throws Exception
     {
         return this.<List<HealthItem>>loadFromWebService("symptoms", new TypeReference<List<HealthItem>>(){});
@@ -226,6 +228,7 @@ public class DiagnosisClient {
      /// Load human body locations
      /// </summary>
      /// <returns>Returns list of human body locations</returns>
+     @Cacheable(value="api-results")
      public List<HealthItem> loadBodyLocations() throws Exception
      {
          return this.<List<HealthItem>>loadFromWebService("body/locations", new TypeReference<List<HealthItem>>(){});

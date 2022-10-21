@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.emmanuelnike.services.DiagnosisClient;
 
 @Controller
-//@EnableCaching
 public class TestController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
