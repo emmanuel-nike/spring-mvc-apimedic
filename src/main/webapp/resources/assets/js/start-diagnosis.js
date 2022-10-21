@@ -7,13 +7,7 @@
 				body_locations: [],
 				symptoms: [],
 				diagnosis: [],
-                form_data: {
-					gender: "0",
-					age: "25",
-					body_locations: [],
-					symptoms: [],
-					diagnosis: []
-				},
+                form_data: {},
 				search: '',
                 form_errors: {},
                 debounce: null,
@@ -21,10 +15,20 @@
                 form_loading: false
             },
             mounted() {
+				this.refreshFormData();
                 this.getBodyLocations();
                 this.getSymptoms();
             },
             methods: {
+				refreshFormData: function(){
+					this.form_data = {
+						gender: "0",
+						age: "25",
+						body_locations: [],
+						symptoms: [],
+						diagnosis: []
+					};
+				},
                 getBodyLocations: function(){
                     this.loading = true;
                     axios
@@ -70,13 +74,7 @@
                         .post(`${baseURL}api/create-appointment`, this.form_data)
                         .then(({data}) => {
                             alert("Appointment has been created successfully");
-                            this.form_data = {
-								gender: "0",
-								age: "25",
-								body_locations: [],
-								symptoms: [],
-								diagnosis: []
-							};
+                            this.refreshFormData();
                         })
                         .catch(({
                             response: error
