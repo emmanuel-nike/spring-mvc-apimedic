@@ -11,7 +11,7 @@ public class AppServiceProvider extends AbstractAnnotationConfigDispatcherServle
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return null; //new Class[] {AppConfigProvider.class};
+		return new Class[] {AppConfigProvider.class};
 	}
 
 	@Override

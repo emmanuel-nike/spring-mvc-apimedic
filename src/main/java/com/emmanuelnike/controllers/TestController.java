@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.emmanuelnike.services.AuthRequest;
 import com.emmanuelnike.services.DiagnosisClient;
 
 @Controller
@@ -19,12 +18,8 @@ public class TestController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
 	{
-//		AuthRequest aRequest = new AuthRequest();
-//		String resp = aRequest.makeAuthRequest();
-//		System.out.println(resp);
 		System.out.println(request.getRequestURL().toString());
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("title", "Home Page Object");
 		mv.setViewName("welcome");
 		
 		return mv;

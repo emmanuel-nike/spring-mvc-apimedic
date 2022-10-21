@@ -9,7 +9,7 @@
 				diagnosis: [],
                 form_data: {
 					gender: "0",
-					age: 25,
+					age: "25",
 					body_locations: [],
 					symptoms: [],
 					diagnosis: []
